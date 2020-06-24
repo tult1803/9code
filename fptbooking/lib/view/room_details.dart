@@ -26,6 +26,7 @@ var menu_item = "Menu Item",
     block = "Block 3",
     floor = "Floor 1",
     status = "EMPTY",
+    resource = "Projector; Display Screen; Air-conditioner",
     fnowDate = DateFormat('dd/MM/yyyy').format(nowDate).toString(),
     fstarttime = DateFormat('HH:mm:ss').format(startTime).toString(),
     fendtime = DateFormat('HH:mm:ss').format(endTime).toString();

@@ -183,10 +183,27 @@ Widget btnDetail(String text1, String text2){
         subtext("$location - $block - $area - $floor"),
         text("Department"),
         subtext(department),
-        Row(children: [text("Area: "),textArea(area)],)
+        Row(children: [text("Area: "),textArea(area)],),
       ],
     );
   }
+
+Widget infoCheck(){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      text("Description"),
+      subtext(description),
+      text("Location"),
+      subtext("$location - $block - $area - $floor"),
+      text("Department"),
+      subtext(department),
+      Row(children: [text("Area: "),textArea(area)],),
+      text("Resources"),
+      subtext(resource),
+    ],
+  );
+}
 
   Widget text(String text) {
     return Text(text, style: TextStyle(
@@ -213,6 +230,16 @@ Widget btnDetail(String text1, String text2){
     child: Text(text, style: TextStyle(
       color: Colors.grey,
       fontSize: 13,
+    ),),
+  );
+}
+
+Widget Check_text(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 5, bottom: 5),
+    child: Text(text, style: TextStyle(
+      color: Colors.grey,
+      fontSize: 16,
     ),),
   );
 }
