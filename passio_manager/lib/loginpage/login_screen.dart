@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:passiomanager/BottomBar/Overview/overview/overview/overview_page.dart';
 import 'package:passiomanager/loginpage/forgotpassword_screen.dart';
+import 'package:passiomanager/storepick/selectstore_screen.dart';
 
 
 
@@ -102,7 +103,7 @@ class LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           print('Login Button Pressed');
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => OverviewPage()),
+              MaterialPageRoute(builder: (context) => SelectStore()),
                   (route) => false);
         },
         padding: EdgeInsets.all(15.0),

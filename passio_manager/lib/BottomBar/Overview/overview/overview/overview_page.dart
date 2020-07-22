@@ -123,7 +123,8 @@ class _OverviewPageState extends State<OverviewPage> {
                       'Thực tế': '5.999.650 đ',
                       'Nạp thẻ': '1.430.003 đ',
                     },
-                    isMoreDetail: true),
+                    isMoreDetail: true,
+                ),
               ),
               OverviewWidgets.buildContent(
                 new OverviewContent(
@@ -139,7 +140,9 @@ class _OverviewPageState extends State<OverviewPage> {
                       'Giao hàng': '0',
                       'Nạp thẻ': '0',
                     },
-                    isMoreDetail: true),
+                    isMoreDetail: true,
+
+                ),
               ),
               OverviewWidgets.buildContent(
                 new OverviewContent(

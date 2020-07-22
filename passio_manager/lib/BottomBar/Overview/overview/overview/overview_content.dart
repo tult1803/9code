@@ -9,7 +9,8 @@ class OverviewContent {
       @required this.change,
       @required this.percentOfChange,
       @required this.content,
-      @required this.isMoreDetail})
+      @required this.isMoreDetail
+      })
       : assert(title != null),
         assert(subTitle != null),
         assert(leadingColor != null),

@@ -1,5 +1,11 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:passiomanager/PieChart/overview_revenue_chart.dart';
 import '../utils/colors.dart';
+import 'dart:ui';
+
+
 
 import 'overview_content.dart';
 import 'dart:math';
@@ -49,12 +55,15 @@ class OverviewWidgets {
           textAlign: TextAlign.left,
         ),
         children: buildContentDetail(
+            overviewContentModel.title,
             overviewContentModel.content, overviewContentModel.isMoreDetail),
       ),
     );
   }
 
   static List<Widget> buildContentDetail(
+//      BuildContext context,
+      String tittle,
       Map<String, String> content, bool isMoreDetail) {
     List<Widget> listContents = [];
     listContents.add(
@@ -94,7 +103,13 @@ class OverviewWidgets {
           width: double.maxFinite,
           height: 45,
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              if(tittle == "Tổng doanh thu"){
+//                Navigator.push(context, MaterialPageRoute(builder: (context) => Revenue()));
+              }
+              print(tittle);
+             // Navigator.push(context, route)
+            },
             child: Text(
               'Xem chi tiêt',
               style: TextStyle(

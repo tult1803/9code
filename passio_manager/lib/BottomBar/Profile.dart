@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:passiomanager/BottomBar/Report.dart';
+import 'package:passiomanager/loginpage/login_screen.dart';
 
 import 'Overview/overview/overview/overview_page.dart';
 //
@@ -162,7 +163,7 @@ class ProfileState extends State<Profile>{
 //                                  color: Colors.white,
                         child: FlatButton(
                             onPressed: () {
-                              // code
+                              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => LoginScreen()), (route) => false);
                             },
                             child: Text("Đăng xuất",
                               style: TextStyle(
