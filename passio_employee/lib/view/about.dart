@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:passioemployee/model/store_model.dart';
 import 'package:passioemployee/model/url/url_color.dart';
 import 'package:passioemployee/model/url/url_icon.dart';
 import 'package:passioemployee/presenter/presenter_about.dart';
@@ -7,6 +8,7 @@ import 'package:passioemployee/view/attendance.dart';
 import 'package:passioemployee/view/calendar.dart';
 import 'package:passioemployee/view/home.dart';
 import 'package:passioemployee/view/people_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget{
   @override
@@ -16,6 +18,8 @@ class Profile extends StatefulWidget{
 }
 
 class ProfileState extends State<Profile>{
+  String name, short_name;
+  String stores;
   int _selectedPage = 4;
   final _pageOptions = [
     Home(),
@@ -24,6 +28,19 @@ class ProfileState extends State<Profile>{
     Calendar(),
     Profile(),
   ];
+
+  @override
+  void initState() {
+    _getToken();
+  }
+  void _getToken()async{
+    final prefs = await SharedPreferences.getInstance();
+    setState((){
+      name = prefs.getString('name_emp');
+      short_name = prefs.getString('short_name_emp');
+      stores = prefs.get('store_work_emp');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +57,7 @@ class ProfileState extends State<Profile>{
               height: 150,
               child: Column(
                 children: [
-                  info("13:00", "12:00", "20:00","MSBuilding.HCM", "Lê Thanh Tú", "LT"),
+                  info("13:00", "12:00", "20:00", stores, name, short_name),
                   Expanded(
                     child: Container(
                       alignment: Alignment.centerLeft,
@@ -99,7 +116,7 @@ class ProfileState extends State<Profile>{
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: icon_bottombar), title: Text("Home")),
+              icon: Icon(Icons.fiber_new, color: icon_bottombar), title: Text("Home")),
           BottomNavigationBarItem(
               icon: Icon(Icons.people, color: icon_bottombar), title: Text("People")),
           BottomNavigationBarItem(

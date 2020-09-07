@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 
 
-Widget container_attendance(Color color_status,Color color, String store_name, String date_time,String status){
+Widget container_attendance(Color color_status,Color color, String store_name, String name_emp,String date_time,String status){
   return Container(
     margin: EdgeInsets.only(bottom: 3),
-    height: 80,
+//    height: 100,
     decoration: new BoxDecoration(
       color: color,                                                          // dòng này để tạo màu cho container
       border: new Border.all(color: Colors.black45, width: 2.0), // dòng này để tạo viền
@@ -14,20 +15,22 @@ Widget container_attendance(Color color_status,Color color, String store_name, S
     child: Row(
       children: [
         Container(
-          width: 200,
+
+          width: 220,
+//          color: Colors.black,
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, top: 10),
                 child: Container(
-                  child:  Text("${store_name}", style: TextStyle(
+                  child:  Text("${store_name} ( ${name_emp} )", overflow: TextOverflow.visible,style: TextStyle(
                     fontSize: 18,
                   ),),
                   alignment: Alignment.centerLeft,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 10),
+                padding: const EdgeInsets.only(left: 20.0, top: 5, bottom: 5),
                 child: Container(
                   child:  Text("${date_time}", style: TextStyle(
                     fontSize: 18,

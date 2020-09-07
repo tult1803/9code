@@ -79,7 +79,8 @@ Widget container_profile_logout(BuildContext context, String txt, Icon icon){
       SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       sharedPreferences.clear();
       print("Clear Save Login");
-      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginScreen()), (Route<dynamic> route) => false);
+
     },
     child: Container(
       alignment: Alignment.centerLeft,
@@ -151,15 +152,16 @@ Widget circle_avata(String short_name, Color color_status){
         colorBrightness: ColorBrightness.light  // Chỉ random ra màu sáng
     ),
 
-    child: Row(
+    child: Stack(
       children: [
-        Expanded(
-          child: Container(
-            margin: EdgeInsets.only(left: 25),
+          Container(
+          decoration: BoxDecoration(
+            borderRadius: new BorderRadius.circular(37),
+          ),
             alignment: Alignment.center,
             child: textName("${short_name}"),
           ),
-        ),
+//        ),
         Container(
           alignment: Alignment.bottomRight,
           child: SizedBox(
@@ -207,8 +209,8 @@ Widget info(String time, String start_time, String end_time, String local, Strin
   );
 }
 Widget textName(String name){
-  return Text("${name}", style: TextStyle(
-      fontSize: 20,
+  return Text("${name} ", overflow: TextOverflow.visible,style: TextStyle(
+      fontSize: 25,
       fontWeight: FontWeight.w800,
       color: Colors.white
   ),);

@@ -7,6 +7,7 @@ import 'package:passioemployee/model/url/url_color.dart';
 import 'package:passioemployee/model/url/url_icon.dart';
 import 'package:passioemployee/presenter/presenter_attendace.dart';
 import 'package:passioemployee/view/people_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'calendar.dart';
 import 'home.dart';
@@ -20,6 +21,7 @@ class Attendance extends StatefulWidget{
 }
 var qrcode;
 class AttendanceState extends State<Attendance>{
+  String _nameEmp;
   int _selectedPage = 2;
   String value;
   final _pageOptions = [ // Thay Text bằng class để Na
@@ -37,7 +39,9 @@ class AttendanceState extends State<Attendance>{
   }
 
   void getAttendance() async{
-    GetAPI getAPI = GetAPI();
+    final prefs = await SharedPreferences.getInstance();
+    _nameEmp = prefs.getString("name_emp");
+    GetAPIAttendance getAPI = GetAPIAttendance();
     setState(() async{
       do {
         data_list = await getAPI.getAttendance(HomeState.token);
@@ -47,7 +51,7 @@ class AttendanceState extends State<Attendance>{
   List<AttendanceAPI> data_list = [];
   @override
   Widget build(BuildContext context) {
-    GetAPI getAPI = GetAPI();
+    GetAPIAttendance getAPI = GetAPIAttendance();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -92,7 +96,6 @@ class AttendanceState extends State<Attendance>{
                   Expanded(
                     child: ListView.builder(
                       itemCount: data_list.length,
-
                       itemBuilder: (context, index) {
                         String check;
                         Color color;
@@ -118,13 +121,15 @@ class AttendanceState extends State<Attendance>{
                         }else if(data_list[index].status == 6){
                           color = Colors.red;
                           check = "Absent";
+                        };
+                        if(data_list[index].employee_name == _nameEmp){
+                          return GestureDetector(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                              child: container_attendance(color,Colors.white70, data_list[index].store_name, data_list[index].employee_name,data_list[index].shift_min.substring(0, 10), check),
+                            ),
+                          );
                         }
-                        return GestureDetector(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                            child: container_attendance(color,Colors.white70, data_list[index].store_name, data_list[index].shift_min.substring(0, 10), check),
-                          ),
-                        );
                       },
                     ),
                   ),
@@ -152,7 +157,7 @@ class AttendanceState extends State<Attendance>{
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: icon_bottombar), title: Text("Home")),
+              icon: Icon(Icons.fiber_new, color: icon_bottombar), title: Text("Home")),
           BottomNavigationBarItem(
               icon: Icon(Icons.people, color: icon_bottombar), title: Text("People")),
           BottomNavigationBarItem(

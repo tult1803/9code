@@ -2,8 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:passioemployee/model/getAPI_profile_emp.dart';
 import 'package:passioemployee/model/model_login.dart';
+import 'package:passioemployee/model/model_profile_emp.dart';
+import 'package:passioemployee/view/home.dart';
 import 'package:passioemployee/view/load_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'forgotpassword_screen.dart';
 
@@ -42,7 +46,7 @@ class LoginScreenState extends State<LoginScreen> {
             onChanged: (text1) {
               email = text1;
             },
-            keyboardType: TextInputType.emailAddress,
+//            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),

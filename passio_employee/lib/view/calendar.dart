@@ -6,7 +6,9 @@ import 'package:passioemployee/model/getAPI_attendance.dart';
 import 'package:passioemployee/model/url/url_color.dart';
 import 'package:passioemployee/model/url/url_icon.dart';
 import 'package:passioemployee/presenter/presenter_calendar.dart';
+import 'package:passioemployee/presenter/presenter_home.dart';
 import 'package:passioemployee/view/people_page.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import 'about.dart';
 import 'attendance.dart';
@@ -21,6 +23,7 @@ class Calendar extends StatefulWidget{
 }
 
 class CalendarState extends State<Calendar>{
+  CalendarController _controller;
   int _selectedPage = 3;
   final _pageOptions = [ // Thay Text bằng class để Na
     Home(),
@@ -31,9 +34,15 @@ class CalendarState extends State<Calendar>{
   ];
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = CalendarController();
+  }
+  @override
   Widget build(BuildContext context) {
     String value;
-    GetAPI getAPI = GetAPI();
+    GetAPIAttendance getAPI = GetAPIAttendance();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -42,35 +51,24 @@ class CalendarState extends State<Calendar>{
         title: Text("Lịch", style: TextStyle(color: Colors.black),),
       ),
       
-     body: ListView(
-       children: [
-//         container_Calendar(Colors.orangeAccent, "Văn Thanh", "9", "Deliveries"),
-//         container_Calendar(Colors.lightGreenAccent ,"Thanh Tú", "9", "Cashier"),
-//         container_Calendar(Colors.red, "Văn Toàn", "9", "Accounts"),
-       Padding(
-         padding: const EdgeInsets.only(left: 10, top: 20, bottom: 10),
-         child: Text("Late", style: TextStyle(
-           fontWeight: FontWeight.w600,
-           color: Colors.blue,
-           fontSize: 20,
-         ),),
+     body: SingleChildScrollView(
+       child: Column(
+         crossAxisAlignment: CrossAxisAlignment.start,
+         children: <Widget>[
+           TableCalendar(
+             initialCalendarFormat: CalendarFormat.week,
+             calendarController: _controller,
+             calendarStyle: CalendarStyle(
+               todayColor: Colors.orange,
+               selectedColor: Theme.of(context).primaryColor,
+             ),
+           ),
+           cardCalendar("MSBuilding.HCM", "7h - 12h"),
+           cardCalendar("MSBuilding.HCM", "12h - 15h"),
+           cardCalendar("MSBuilding.HCM", "15h - 19h"),
+           cardCalendar("MSBuilding.HCM", "19h - 21h"),
+         ],
        ),
-             container_Calendar(Colors.red, "Văn Toản", "9", "Accounts", false, "VT"),
-             container_Calendar(Colors.red, "Văn Toàn", "9", "Accounts", false, "VT"),
-         Padding(
-           padding: const EdgeInsets.only(left: 10, top: 20, bottom: 10),
-           child: Text("On shift", style: TextStyle(
-             fontWeight: FontWeight.w600,
-             color: Colors.blue,
-             fontSize: 20,
-           ),),
-         ),
-         container_Calendar(Colors.lightGreenAccent, "Văn Thanh", "9", "Deliveries", true, "VT"),
-         container_Calendar(Colors.lightGreenAccent ,"Thanh Tùng", "9", "Cashier", true, "TT"),
-         container_Calendar(Colors.lightGreenAccent ,"Trần Dần", "8", "Cashier", true, "TD"),
-         container_Calendar(Colors.lightGreenAccent ,"Trần Trung", "9", "Deliveries", true, "TT"),
-         container_Calendar(Colors.lightGreenAccent ,"Cao Bá", "9", "Deliveries", true, "CB"),
-       ],
      ),
 
      bottomNavigationBar: BottomNavigationBar(
@@ -87,7 +85,7 @@ class CalendarState extends State<Calendar>{
        },
        items: [
          BottomNavigationBarItem(
-             icon: Icon(Icons.home, color: icon_bottombar), title: Text("Home")),
+             icon: Icon(Icons.fiber_new, color: icon_bottombar), title: Text("Home")),
          BottomNavigationBarItem(
              icon: Icon(Icons.people, color: icon_bottombar), title: Text("People")),
          BottomNavigationBarItem(

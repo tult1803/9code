@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Icon icon_appbar_home = Icon(Icons.home, color: Colors.black);
+Icon icon_appbar_home = Icon(Icons.fiber_new, color: Colors.black);
 Icon icon_appbar_calendar = Icon(Icons.perm_contact_calendar, color: Colors.black);
 Icon icon_appbar_about = Icon(Icons.account_circle, color: Colors.black);
 Icon icon_appbar_attendance = Icon(Icons.check_circle_outline, color: Colors.black);

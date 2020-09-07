@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:passioemployee/loaders/color_loader_4.dart';
+import 'package:passioemployee/model/getAPI_profile_emp.dart';
 import 'package:passioemployee/model/model_login.dart';
+import 'package:passioemployee/model/model_profile_emp.dart';
 import 'package:passioemployee/model/postAPI_login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,6 +44,21 @@ class LoadState extends State{
           sharedPreferences.setString("token", data.access_token);
           sharedPreferences.setString("email", data.email);
           sharedPreferences.setString("username", data.user_name);
+          String store_name_emp;
+          GetAPIProfile getApi = GetAPIProfile();
+          DataProfile dataProfile = await getApi.getProfile(data.access_token);
+          dataProfile.data_store.forEach((element) {
+            store_name_emp = element.name;
+          });
+          sharedPreferences.setString("id_emp", '${dataProfile.id}');
+          sharedPreferences.setString("name_emp", dataProfile.name);
+          sharedPreferences.setString("short_name_emp", dataProfile.short_name);
+          sharedPreferences.setString("address_emp", dataProfile.address);
+          sharedPreferences.setString("main_store_id", "${dataProfile.main_store_id}");
+          sharedPreferences.setString("salary_emp", '${dataProfile.salary}');
+          sharedPreferences.setString("phone_emp", dataProfile.phone_number);
+          sharedPreferences.setString("email_emp", dataProfile.email);
+          sharedPreferences.setString("store_work_emp", '${store_name_emp}');
           DemoState.username = data.user_name;
           DemoState.email = data.email;
           Navigator.of(context).pushAndRemoveUntil(

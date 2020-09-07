@@ -2,14 +2,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:passioemployee/model/url/url_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model_attendance.dart';
 
-class GetAPI{
+class GetAPIAttendance{
   static int status;
   getAttendance(String token) async {
+    final prefs = await SharedPreferences.getInstance();
     final response = await http.get(
-      '${url_main}/${url_Attendance}',
+      '${url_main}/${url_Attendance}?storeid=${prefs.get('main_store_id')}',
       headers: <String, String>{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
