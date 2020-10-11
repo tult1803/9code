@@ -1,4 +1,6 @@
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -85,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => ForgotPassEmailPage()), (route) => false);
           },
-          child: Text("Forgot Password"),
+          child: Text("Forgot Password", style: TextStyle(color: Colors.blue),),
         ),
       ],
     );
@@ -274,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextSpan(
                   text: 'Sign Up',
                   style: TextStyle(
-                    color: Colors.green,
+                    color: Colors.black,
                     fontSize: MediaQuery.of(context).size.height / 40,
                     fontWeight: FontWeight.bold,
                   ),

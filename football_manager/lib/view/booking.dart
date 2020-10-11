@@ -27,12 +27,12 @@ class BookingPageState extends State<BookingPage> {
     _controller = CalendarController();
     final _selectedDay = DateTime.now();
     _events = {
-      _selectedDay.subtract(Duration(days: 0)): ['Sân bóng SWD', 'Sân bóng HCI', 'Sân bóng PRM'],
-      _selectedDay.subtract(Duration(days: -1)): ['Sân bóng ACC', 'Sân bóng ISC'],
-      _selectedDay.subtract(Duration(days: -2)): ['Sân bóng SWD', 'Sân bóng ISC', 'Sân bóng HCI'],
-      _selectedDay.subtract(Duration(days: -3)): ['Sân bóng ACC', 'Sân bóng PRM', 'Sân bóng HCI', 'Sân bóng ISC'],
-      _selectedDay.subtract(Duration(days: -4)): ['Sân bóng HCI', 'Sân bóng PRM', 'Sân bóng ACC', 'Sân bóng SWD', 'Sân bóng ISC'],
-      _selectedDay.subtract(Duration(days: -5)): ['Sân bóng SWD', 'Sân bóng HCI', 'Sân bóng PRM', 'Sân bóng ACC', 'Sân bóng ISC'],
+      _selectedDay.subtract(Duration(days: 0)):  ['Sân bóng SWD   4.5', 'Sân bóng HCI   5.0', 'Sân bóng PRM   3.5'],
+      _selectedDay.subtract(Duration(days: -1)): ['Sân bóng ACC   3.0', 'Sân bóng ISC   4.0'],
+      _selectedDay.subtract(Duration(days: -2)): ['Sân bóng SWD   4.5', 'Sân bóng ISC   4.0', 'Sân bóng HCI   5.0'],
+      _selectedDay.subtract(Duration(days: -3)): ['Sân bóng ACC   3.0', 'Sân bóng PRM   3.5', 'Sân bóng HCI   5.0', 'Sân bóng ISC   4.0'],
+      _selectedDay.subtract(Duration(days: -4)): ['Sân bóng HCI   5.0', 'Sân bóng PRM   3.5', 'Sân bóng ACC   3.0', 'Sân bóng SWD   4.5', 'Sân bóng ISC   4.0'],
+      _selectedDay.subtract(Duration(days: -5)): ['Sân bóng SWD   4.5', 'Sân bóng HCI   5.0', 'Sân bóng PRM   3.5', 'Sân bóng ACC   3.0', 'Sân bóng ISC   4.0'],
     };
 
     _selectedEvents = _events[_selectedDay] ?? [];
@@ -84,7 +84,7 @@ class BookingPageState extends State<BookingPage> {
       print('onDaySelected: $day');
     });
   }
-  Widget _buildEventList() {
+  Widget _buildEventList(){
     return ListView(
       children: _selectedEvents
           .map((event) => Container(
@@ -97,8 +97,30 @@ class BookingPageState extends State<BookingPage> {
         margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: ListTile(
           trailing: Text('Chi tiết', style: TextStyle(color: Colors.blue, fontSize: 15),),
-          title: Text(event.toString(), style: GoogleFonts.yrsa(fontSize: 26, fontWeight: FontWeight.w500),),
-          subtitle: Text('Mở cửa: 8h - 22h', style: TextStyle(fontSize: 16,),),
+          title: Row(
+            children: [
+              Text(event.toString(), style: GoogleFonts.yrsa(fontSize: 27, fontWeight: FontWeight.w500),),
+              Icon(Icons.star ,color: Colors.black,),
+            ],
+          ),
+          subtitle: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Mở cửa: 8h - 22h', style: TextStyle(fontSize: 16,),),
+              Container(
+                // margin: EdgeInsets.only(left: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Icon(Icons.watch_later_outlined, size: 15,),
+                    Text('15p - 4km' , style: TextStyle(color: Colors.black, fontSize: 15),),
+                    // Icon(Icons.),
+                  ],
+                ),
+              ),
+            ],
+          ),
           onTap: () {
             print('$event tapped!');
 //            Demo nhan tapped

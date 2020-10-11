@@ -59,6 +59,8 @@ flutter:
      - images/bg2.jpg
      - images/logo.png
      - images/iconGoogle.jpg
+     - images/iconDatSan.png
+     - images/iconGanNhat.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
